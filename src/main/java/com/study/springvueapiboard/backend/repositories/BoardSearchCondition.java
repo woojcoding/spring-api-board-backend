@@ -1,6 +1,7 @@
 package com.study.springvueapiboard.backend.repositories;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -8,6 +9,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@NoArgsConstructor
 public class BoardSearchCondition {
 
     private int pageNum = 1; // 현재 페이지

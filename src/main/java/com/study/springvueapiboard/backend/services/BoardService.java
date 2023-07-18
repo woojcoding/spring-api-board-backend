@@ -1,5 +1,6 @@
 package com.study.springvueapiboard.backend.services;
 
+import com.study.springvueapiboard.backend.dtos.BoardDetailResponseDto;
 import com.study.springvueapiboard.backend.dtos.BoardListDto;
 import com.study.springvueapiboard.backend.dtos.BoardResponseDto;
 import com.study.springvueapiboard.backend.repositories.BoardRepository;
@@ -49,5 +50,27 @@ public class BoardService {
                 .boardResponseDtoList(boardResponseDtoList)
                 .totalBoardCount(totalBoardCount)
                 .build();
+    }
+
+    /**
+     * 조회수 증가하는 메서드
+     *
+     * @param boardId 게시글 Id
+     */
+    public void updateViews(int boardId) {
+        boardRepository.updateViews(boardId);
+    }
+
+    /**
+     * 게시글의 정보를 가져오는 메서드
+     *
+     * @param boardId 조회할 게시글의 Id
+     * @return BoardDetailResponseDto 게시글 정보
+     */
+    public BoardDetailResponseDto getBoard(int boardId) {
+        BoardDetailResponseDto boardDetailResponseDto =
+                boardRepository.getBoard(boardId);
+
+        return boardDetailResponseDto;
     }
 }

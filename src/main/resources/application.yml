@@ -11,3 +11,11 @@ spring:
     url: jdbc:mysql://localhost:3306/ebrainsoft_study
     username: ebsoft
     password: ebsoft
+
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 15MB
+
+file:
+  dir: C:\Users\82103\Desktop\upload\

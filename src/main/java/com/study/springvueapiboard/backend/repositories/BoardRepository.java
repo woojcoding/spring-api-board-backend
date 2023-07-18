@@ -1,5 +1,6 @@
 package com.study.springvueapiboard.backend.repositories;
 
+import com.study.springvueapiboard.backend.dtos.BoardDetailResponseDto;
 import com.study.springvueapiboard.backend.dtos.BoardResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.RowBounds;
@@ -34,5 +35,24 @@ public class BoardRepository {
      */
     public int getBoardCount(BoardSearchCondition boardSearchCondition) {
         return boardMapper.getBoardCount(boardSearchCondition);
+    }
+
+    /**
+     * 조회수 증가 메서드
+     *
+     * @param boardId 게시글 Id
+     */
+    public void updateViews(int boardId) {
+        boardMapper.updateViews(boardId);
+    }
+
+    /**
+     * 게시글의 자세한 정보를 가져오는 메서드
+     *
+     * @param boardId 게시글 Id
+     * @return BoardDetailResponseDto 게시글의 자세한 정보
+     */
+    public BoardDetailResponseDto getBoard(int boardId) {
+        return boardMapper.getBoard(boardId);
     }
 }
