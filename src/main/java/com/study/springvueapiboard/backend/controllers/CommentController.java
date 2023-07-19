@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/boards/free/view/{boardId}")
-@CrossOrigin(origins = "http://loacalhost:3000")
+@RequestMapping("/api/v1/boards/free/view")
+@CrossOrigin(origins = "http://localhost:3000")
 public class CommentController {
 
     private final CommentService commentService;
 
-    @PostMapping("/comments")
+    @PostMapping("/{boardId}/comments")
     @ResponseStatus(HttpStatus.CREATED)
     public void postComment(
             @PathVariable("boardId") int boardId,
