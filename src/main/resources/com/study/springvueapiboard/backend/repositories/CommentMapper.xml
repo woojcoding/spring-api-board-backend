@@ -9,4 +9,10 @@
         WHERE board_id = #{boardId}
         ORDER BY comment_id DESC
     </select>
+
+    <!-- 댓글을 db에 저장 -->
+    <insert id="postComment">
+        INSERT INTO comment(content, board_id, created_at)
+        VALUES (#{commentRequestDto.content}, #{boardId}, CURRENT_TIMESTAMP)
+    </insert>
 </mapper>

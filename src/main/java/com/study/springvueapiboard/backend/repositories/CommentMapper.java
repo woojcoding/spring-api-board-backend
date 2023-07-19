@@ -1,5 +1,6 @@
 package com.study.springvueapiboard.backend.repositories;
 
+import com.study.springvueapiboard.backend.dtos.CommentRequestDto;
 import com.study.springvueapiboard.backend.dtos.CommentResponseDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -18,4 +19,12 @@ public interface CommentMapper {
      * @return List<CommentResponseDto>  댓글 List
      */
     List<CommentResponseDto> getCommentList(int boardId);
+
+    /**
+     * 댓글을 저장하는 메서드
+     *
+     * @param boardId           게시글 Id
+     * @param commentRequestDto 게시글 본문을 담은 Dto
+     */
+    void postComment(int boardId, CommentRequestDto commentRequestDto);
 }
