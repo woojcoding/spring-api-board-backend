@@ -1,6 +1,7 @@
 package com.study.springvueapiboard.backend.repositories;
 
 import com.study.springvueapiboard.backend.dtos.BoardDetailResponseDto;
+import com.study.springvueapiboard.backend.dtos.BoardPostRequestDto;
 import com.study.springvueapiboard.backend.dtos.BoardResponseDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
@@ -42,4 +43,11 @@ public interface BoardMapper {
      * @return BoardDetailResponseDto 게시글의 자세한 정보
      */
     BoardDetailResponseDto getBoard(int boardId);
+
+    /**
+     * 게시물을 작성하는 메서드
+     *
+     * @param boardPostRequestDto 게시물 작성 요청 DTO
+     */
+    void postBoard(BoardPostRequestDto boardPostRequestDto);
 }

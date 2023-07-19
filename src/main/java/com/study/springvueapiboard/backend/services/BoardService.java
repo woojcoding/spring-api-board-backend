@@ -2,13 +2,16 @@ package com.study.springvueapiboard.backend.services;
 
 import com.study.springvueapiboard.backend.dtos.BoardDetailResponseDto;
 import com.study.springvueapiboard.backend.dtos.BoardListDto;
+import com.study.springvueapiboard.backend.dtos.BoardPostRequestDto;
 import com.study.springvueapiboard.backend.dtos.BoardResponseDto;
 import com.study.springvueapiboard.backend.repositories.BoardRepository;
 import com.study.springvueapiboard.backend.repositories.BoardSearchCondition;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -72,5 +75,17 @@ public class BoardService {
                 boardRepository.getBoard(boardId);
 
         return boardDetailResponseDto;
+    }
+
+    /**
+     * 게시물을 작성하는 메서드
+     *
+     * @param boardPostRequestDto  게시물 작성 요청 DTO
+     * @throws IOException the io exception
+     */
+    @Transactional
+    public void postBoard(BoardPostRequestDto boardPostRequestDto
+    ) throws IOException {
+        boardRepository.postBoard(boardPostRequestDto);
     }
 }

@@ -86,4 +86,12 @@
         SET views = views + 1
         WHERE board_id = #{boardId}
     </update>
+
+    <!-- 게시글을 board 테이블에 저장 후 생성된 boardId를 리턴 -->
+    <insert id="postBoard" useGeneratedKeys="true" keyProperty="boardId">
+        INSERT INTO board(writer, password, title, content,
+                          created_at, category_id)
+        VALUES (#{writer}, #{password}, #{title}, #{content},
+                CURRENT_TIMESTAMP, #{categoryId})
+    </insert>
 </mapper>
