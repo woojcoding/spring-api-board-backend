@@ -94,4 +94,14 @@
         VALUES (#{writer}, #{password}, #{title}, #{content},
                 CURRENT_TIMESTAMP, #{categoryId})
     </insert>
+
+    <!-- 게시글의 작성자, 제목, 내용, 수정일을 업데이트 -->
+    <update id="updateBoard">
+        update board
+        SET writer = #{boardUpdateRequestDto.writer},
+            title = #{boardUpdateRequestDto.title},
+            content = #{boardUpdateRequestDto.content},
+            modified_at = CURRENT_TIMESTAMP
+        WHERE board_id = #{boardId}
+    </update>
 </mapper>

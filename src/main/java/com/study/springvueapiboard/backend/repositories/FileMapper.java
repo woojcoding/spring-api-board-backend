@@ -33,4 +33,11 @@ public interface FileMapper {
      * @return the file
      */
     FileDto getFile(int fileId);
+
+    /**
+     * 파일 Id에 해당하는 파일의 isDeleted = true로 해주는 메서드
+     *
+     * @param fileId 파일 Id
+     */
+    void deleteFile(int fileId);
 }

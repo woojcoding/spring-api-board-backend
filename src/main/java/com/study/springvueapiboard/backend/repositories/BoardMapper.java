@@ -3,6 +3,7 @@ package com.study.springvueapiboard.backend.repositories;
 import com.study.springvueapiboard.backend.dtos.BoardDetailResponseDto;
 import com.study.springvueapiboard.backend.dtos.BoardPostRequestDto;
 import com.study.springvueapiboard.backend.dtos.BoardResponseDto;
+import com.study.springvueapiboard.backend.dtos.BoardUpdateRequestDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
@@ -50,4 +51,12 @@ public interface BoardMapper {
      * @param boardPostRequestDto 게시물 작성 요청 DTO
      */
     void postBoard(BoardPostRequestDto boardPostRequestDto);
+
+    /**
+     * 게시글을 수정하는 메서드
+     *
+     * @param boardId               게시글 Id
+     * @param boardUpdateRequestDto 게시글을 수정하는데 필요한 Dto
+     */
+    void updateBoard(int boardId, BoardUpdateRequestDto boardUpdateRequestDto);
 }

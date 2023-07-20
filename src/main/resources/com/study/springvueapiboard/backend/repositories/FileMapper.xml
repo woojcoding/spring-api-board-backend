@@ -21,4 +21,11 @@
         INSERT INTO file(original_name, saved_name, board_id)
         VALUES (#{originalName}, #{savedName}, #{boardId})
     </insert>
+
+    <!-- 파일 Id로 파일의 is_deleted를 1로 바꾸어 삭제 의미 부여해주는 업데이트 -->
+    <update id="deleteFile">
+        UPDATE file
+        SET is_deleted = 1
+        WHERE file_id = #{fileId}
+    </update>
 </mapper>

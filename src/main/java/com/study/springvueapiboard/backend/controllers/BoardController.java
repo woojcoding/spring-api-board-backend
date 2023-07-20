@@ -3,6 +3,7 @@ package com.study.springvueapiboard.backend.controllers;
 import com.study.springvueapiboard.backend.dtos.BoardDetailResponseDto;
 import com.study.springvueapiboard.backend.dtos.BoardListDto;
 import com.study.springvueapiboard.backend.dtos.BoardPostRequestDto;
+import com.study.springvueapiboard.backend.dtos.BoardUpdateRequestDto;
 import com.study.springvueapiboard.backend.dtos.CategoryDto;
 import com.study.springvueapiboard.backend.dtos.CommentResponseDto;
 import com.study.springvueapiboard.backend.dtos.FileDto;
@@ -22,6 +23,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -183,5 +185,33 @@ public class BoardController {
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition)
                 .body(urlResource);
+    }
+
+    /**
+     * 게시글을 수정하는 메서드
+     *
+     * @param boardId               게시글 Id
+     * @param boardUpdateRequestDto 게시글 수정에 필요한 Dto
+     * @return 수정 후 게시글 보기 페이지로 이동
+     */
+    @PatchMapping("/board/free/modify/{boardId}")
+    public int updateBoard(
+            @PathVariable("boardId") int boardId,
+            @ModelAttribute BoardUpdateRequestDto boardUpdateRequestDto
+    ) throws IOException {
+        // 게시글 부분 업데이트 적용
+        boardService.updateBoard(boardId, boardUpdateRequestDto);
+
+        // 파일 삭제 적용
+        fileService.deleteFiles(boardUpdateRequestDto.getDeleteFileIdList());
+
+        // 파일 업로드 적용
+        MultipartFile[] files = boardUpdateRequestDto.getFiles();
+
+        List<FileDto> fileDtoList = fileService.saveFiles(files, boardId);
+
+        fileService.uploadFiles(fileDtoList);
+
+        return boardId;
     }
 }

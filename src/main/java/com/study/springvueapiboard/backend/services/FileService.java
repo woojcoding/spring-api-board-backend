@@ -128,4 +128,15 @@ public class FileService {
     public FileDto getFile(int fileId) {
         return fileRepository.getFile(fileId);
     }
+
+    /**
+     * file들의 isDeleted = 1 로 해주는 메서드
+     *
+     * @param deleteFileIdList 지울 FileId List
+     */
+    public void deleteFiles(List<Integer> deleteFileIdList) {
+        for (int fileId : deleteFileIdList) {
+            fileRepository.deleteFile(fileId);
+        }
+    }
 }
