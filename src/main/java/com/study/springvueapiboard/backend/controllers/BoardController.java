@@ -69,7 +69,7 @@ public class BoardController {
     /**
      * 게시글에 대한 상세정보를 리턴해주는 메서드
      *
-     * @param boardId              조회할 게시글 Id
+     * @param boardId 조회할 게시글 Id
      * @return the board
      */
     @GetMapping("/boards/free/view/{boardId}")
@@ -97,11 +97,22 @@ public class BoardController {
     }
 
     /**
+     * 카테고리 List를 반환해주는 메서드
+     *
+     * @return 카테고리 List
+     */
+    @GetMapping("/categories")
+    @ResponseStatus(HttpStatus.OK)
+    public List<CategoryDto> getCategoryList() {
+        return categoryService.getCategoryList();
+    }
+
+    /**
      * 게시글을 등록 요청하는 메서드
      *
-     * @param boardPostRequestDto  게시글 등록에 필요한 Dto
-     * @param bindingResult 유효성 검증을 담는 객체
-     * @return the string
+     * @param boardPostRequestDto 게시글 등록에 필요한 Dto
+     * @param bindingResult       유효성 검증을 담는 객체
+     * @return boardId            작성한 게시글의 Id
      * @throws IOException the io exception
      */
     @PostMapping("/board/free/write")

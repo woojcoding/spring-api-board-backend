@@ -53,5 +53,5 @@ public class BoardPostRequestDto {
     private String content;
 
     @Nullable
-    private MultipartFile[] files; // 파일들
+    private MultipartFile[] files = new MultipartFile[0]; // 파일들
 }
