@@ -192,12 +192,14 @@ public class BoardController {
      *
      * @param boardId               게시글 Id
      * @param boardUpdateRequestDto 게시글 수정에 필요한 Dto
+     * @param bindingResult         유효성 검증을 담는 객체
      * @return 수정 후 게시글 보기 페이지로 이동
      */
     @PatchMapping("/board/free/modify/{boardId}")
     public int updateBoard(
             @PathVariable("boardId") int boardId,
-            @ModelAttribute BoardUpdateRequestDto boardUpdateRequestDto
+            @ModelAttribute BoardUpdateRequestDto boardUpdateRequestDto,
+            BindingResult bindingResult
     ) throws IOException {
         // 게시글 부분 업데이트 적용
         boardService.updateBoard(boardId, boardUpdateRequestDto);

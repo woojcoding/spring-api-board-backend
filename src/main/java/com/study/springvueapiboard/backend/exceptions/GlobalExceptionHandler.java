@@ -44,4 +44,31 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .body(errorMessageList);
     }
+
+    /**
+     * BoardCanNotUpdate 예외가 발생하였을 떄 예외처리하는 메서드
+     * <p>
+     * 에러메세지를 담은 ResponseEntity를 반환해줌
+     *
+     * @param ex 예외
+     * @return ResponseEntity<List<String>> 에러메세지를 담은 ResponseEntity
+     */
+    @ExceptionHandler(BoardCanNotPost.class)
+    public ResponseEntity<List<String>> handleBoardCanNotPost(
+            BoardCanNotUpdate ex) {
+        // 유효성 검증 실패 시 에러 메시지 처리
+        BindingResult bindingResult = ex.getBindingResult();
+
+        List<ObjectError> errorList = bindingResult.getAllErrors();
+
+        List<String> errorMessageList = new ArrayList<>();
+
+        for (ObjectError error : errorList) {
+            errorMessageList.add(error.getDefaultMessage());
+        }
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(errorMessageList);
+    }
 }
