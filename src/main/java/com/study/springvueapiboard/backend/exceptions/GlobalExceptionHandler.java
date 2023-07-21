@@ -53,8 +53,8 @@ public class GlobalExceptionHandler {
      * @param ex 예외
      * @return ResponseEntity<List<String>> 에러메세지를 담은 ResponseEntity
      */
-    @ExceptionHandler(BoardCanNotPost.class)
-    public ResponseEntity<List<String>> handleBoardCanNotPost(
+    @ExceptionHandler(BoardCanNotUpdate.class)
+    public ResponseEntity<List<String>> handleBoardCanNotUpdate(
             BoardCanNotUpdate ex) {
         // 유효성 검증 실패 시 에러 메시지 처리
         BindingResult bindingResult = ex.getBindingResult();
