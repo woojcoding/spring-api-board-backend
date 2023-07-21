@@ -15,6 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The type Board service.
+ */
 @Service
 @RequiredArgsConstructor
 public class BoardService {
@@ -26,7 +29,7 @@ public class BoardService {
      * Repository에 요청하기 위해 사용하는 메서드
      *
      * @param boardSearchCondition 검색 조건
-     * @return List<BoardResponseDto>               게시글 정보 List
+     * @return List<BoardResponseDto>                 게시글 정보 List
      */
     public BoardListDto getBoardList(BoardSearchCondition boardSearchCondition) {
 
@@ -81,7 +84,7 @@ public class BoardService {
     /**
      * 게시물을 작성하는 메서드
      *
-     * @param boardPostRequestDto  게시물 작성 요청 DTO
+     * @param boardPostRequestDto 게시물 작성 요청 DTO
      * @throws IOException the io exception
      */
     @Transactional
@@ -101,5 +104,27 @@ public class BoardService {
                             BoardUpdateRequestDto boardUpdateRequestDto
     ) {
         boardRepository.updateBoard(boardId, boardUpdateRequestDto);
+    }
+
+    /**
+     * 비밀번호를 검증하는 메서드
+     *
+     * @param boardId               게시글 Id
+     * @param boardUpdateRequestDto 게시글을 수정하는데 필요한 Dto
+     * @return isValidated          검증에 성공하면 true 반환
+     */
+    public boolean validatePassword(
+            int boardId,
+            BoardUpdateRequestDto boardUpdateRequestDto
+    ) {
+        boolean isValidated = false;
+
+        String dbPassword = boardRepository.getPassword(boardId);
+
+        if (dbPassword.equals(boardUpdateRequestDto.getPassword())) {
+            isValidated = true;
+        }
+
+        return isValidated;
     }
 }

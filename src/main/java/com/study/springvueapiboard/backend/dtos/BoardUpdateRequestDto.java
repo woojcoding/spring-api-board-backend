@@ -50,7 +50,7 @@ public class BoardUpdateRequestDto {
     private String content;
 
     @Nullable
-    private MultipartFile[] files; // 파일
+    private MultipartFile[] files = new MultipartFile[0]; // 파일
 
     /**
      * 삭제할 파일 Id들

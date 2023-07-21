@@ -71,4 +71,25 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .body(errorMessageList);
     }
+
+    /**
+     * InvalidPassword 예외가 발생하였을 떄 예외처리하는 메서드
+     * <p>
+     * 에러메세지를 담은 ResponseEntity를 반환해줌
+     *
+     * @param ex 예외
+     * @return ResponseEntity<List<String>> 에러메세지를 담은 ResponseEntity
+     */
+    @ExceptionHandler(InvalidPassword.class)
+    public ResponseEntity<List<String>> handleInvalidPassword(
+            InvalidPassword ex) {
+        // 유효성 검증 실패 시 에러 메시지 처리
+        List<String> errorMessageList = new ArrayList<>();
+
+        errorMessageList.add(ex.getMessage());
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(errorMessageList);
+    }
 }

@@ -104,4 +104,11 @@
             modified_at = CURRENT_TIMESTAMP
         WHERE board_id = #{boardId}
     </update>
+
+    <!-- 게시글의 암호를 조회 -->
+    <select id="getPassword" resultType="java.lang.String">
+        SELECT password
+        FROM board
+        WHERE board_id = #{boardId}
+    </select>
 </mapper>

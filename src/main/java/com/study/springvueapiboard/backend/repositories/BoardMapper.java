@@ -59,4 +59,12 @@ public interface BoardMapper {
      * @param boardUpdateRequestDto 게시글을 수정하는데 필요한 Dto
      */
     void updateBoard(int boardId, BoardUpdateRequestDto boardUpdateRequestDto);
+
+    /**
+     * 비밀번호 검증을 위해 비밀번호를 가져오는 메서드
+     *
+     * @param boardId 게시글 Id
+     * @return 비밀번호 password
+     */
+    String getPassword(int boardId);
 }

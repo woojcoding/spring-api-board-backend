@@ -78,4 +78,14 @@ public class BoardRepository {
     ) {
         boardMapper.updateBoard(boardId, boardUpdateRequestDto);
     }
+
+    /**
+     * 비밀번호 검증을 위해 비밀번호를 가져오는 메서드
+     *
+     * @param boardId 게시글 Id
+     * @return 비밀번호 password
+     */
+    public String getPassword(int boardId) {
+        return boardMapper.getPassword(boardId);
+    }
 }

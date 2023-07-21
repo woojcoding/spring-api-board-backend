@@ -8,6 +8,8 @@ import com.study.springvueapiboard.backend.dtos.CategoryDto;
 import com.study.springvueapiboard.backend.dtos.CommentResponseDto;
 import com.study.springvueapiboard.backend.dtos.FileDto;
 import com.study.springvueapiboard.backend.exceptions.BoardCanNotPost;
+import com.study.springvueapiboard.backend.exceptions.BoardCanNotUpdate;
+import com.study.springvueapiboard.backend.exceptions.InvalidPassword;
 import com.study.springvueapiboard.backend.repositories.BoardSearchCondition;
 import com.study.springvueapiboard.backend.services.BoardService;
 import com.study.springvueapiboard.backend.services.CategoryService;
@@ -198,9 +200,19 @@ public class BoardController {
     @PatchMapping("/board/free/modify/{boardId}")
     public int updateBoard(
             @PathVariable("boardId") int boardId,
-            @ModelAttribute BoardUpdateRequestDto boardUpdateRequestDto,
+            @Valid @ModelAttribute BoardUpdateRequestDto boardUpdateRequestDto,
             BindingResult bindingResult
     ) throws IOException {
+        // 유효성 검증
+        if (bindingResult.hasErrors()) {
+            throw new BoardCanNotUpdate(bindingResult);
+        }
+
+        if (!boardService.validatePassword(boardId, boardUpdateRequestDto)) {
+            throw new InvalidPassword("비밀번호를 확인하세요");
+
+        }
+
         // 게시글 부분 업데이트 적용
         boardService.updateBoard(boardId, boardUpdateRequestDto);
 
