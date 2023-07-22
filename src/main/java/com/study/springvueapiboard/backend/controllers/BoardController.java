@@ -240,7 +240,7 @@ public class BoardController {
      * @param inputPassword             입력한 비밀번호
      */
     @DeleteMapping("/board/free/delete/{boardId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     public void deleteBoard(
             @PathVariable("boardId") int boardId,
             @RequestParam("password") String inputPassword
