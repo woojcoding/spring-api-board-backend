@@ -88,4 +88,13 @@ public class BoardRepository {
     public String getPassword(int boardId) {
         return boardMapper.getPassword(boardId);
     }
+
+    /**
+     * 게시글을 삭제하는 메서드
+     *
+     * @param boardId 게시글 Id
+     */
+    public void deleteBoard(int boardId) {
+        boardMapper.deleteBoard(boardId);
+    }
 }

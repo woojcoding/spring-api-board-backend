@@ -111,4 +111,10 @@
         FROM board
         WHERE board_id = #{boardId}
     </select>
+
+    <!-- 게시글을 삭제 -->
+    <delete id="deleteBoard">
+        DELETE FROM board
+        WHERE board_id = #{boardId}
+    </delete>
 </mapper>

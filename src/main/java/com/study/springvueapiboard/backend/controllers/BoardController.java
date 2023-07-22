@@ -23,12 +23,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -208,7 +210,9 @@ public class BoardController {
             throw new BoardCanNotUpdate(bindingResult);
         }
 
-        if (!boardService.validatePassword(boardId, boardUpdateRequestDto)) {
+        String inputPassword = boardUpdateRequestDto.getPassword();
+
+        if (!boardService.validatePassword(boardId, inputPassword)) {
             throw new InvalidPassword("비밀번호를 확인하세요");
 
         }
@@ -227,5 +231,28 @@ public class BoardController {
         fileService.uploadFiles(fileDtoList);
 
         return boardId;
+    }
+
+    /**
+     * 게시글을 삭제하는 메서드
+     *
+     * @param boardId              게시글 Id
+     * @param inputPassword             입력한 비밀번호
+     */
+    @DeleteMapping("/board/free/delete/{boardId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteBoard(
+            @PathVariable("boardId") int boardId,
+            @RequestParam("password") String inputPassword
+    ) {
+        // 비밀번호 검증 후 게시글을 삭제
+        if (!boardService.validatePassword(boardId, inputPassword)) {
+            throw new InvalidPassword("비밀번호를 확인하세요");
+        }
+
+        boardService.deleteBoard(boardId);
+
+        // 파일 삭제
+        fileService.deleteFilesByBoardId(boardId);
     }
 }

@@ -67,4 +67,11 @@ public interface BoardMapper {
      * @return 비밀번호 password
      */
     String getPassword(int boardId);
+
+    /**
+     * 게시글을 삭제하는 메서드
+     *
+     * @param boardId 게시글 Id
+     */
+    void deleteBoard(int boardId);
 }

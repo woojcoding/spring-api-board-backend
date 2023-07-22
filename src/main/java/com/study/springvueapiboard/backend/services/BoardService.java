@@ -110,21 +110,30 @@ public class BoardService {
      * 비밀번호를 검증하는 메서드
      *
      * @param boardId               게시글 Id
-     * @param boardUpdateRequestDto 게시글을 수정하는데 필요한 Dto
+     * @param inputPassword         입력한 패스워드
      * @return isValidated          검증에 성공하면 true 반환
      */
     public boolean validatePassword(
-            int boardId,
-            BoardUpdateRequestDto boardUpdateRequestDto
+            int boardId, String inputPassword
     ) {
         boolean isValidated = false;
 
         String dbPassword = boardRepository.getPassword(boardId);
 
-        if (dbPassword.equals(boardUpdateRequestDto.getPassword())) {
+        if (dbPassword.equals(inputPassword)) {
             isValidated = true;
         }
 
         return isValidated;
+    }
+
+    /**
+     * 게시글을 삭제하는 메서드
+     *
+     * @param boardId              게시글 Id
+     */
+    @Transactional
+    public void deleteBoard(int boardId) {
+            boardRepository.deleteBoard(boardId);
     }
 }
